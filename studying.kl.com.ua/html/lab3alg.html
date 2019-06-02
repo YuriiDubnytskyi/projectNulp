@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <style type="text/css">
+        
+    body{
+        background:#486596;
+        display: flex;
+    }
+    section{
+        margin: 20px;
+        padding: 20px;
+
+    }
+    .text{
+        color:white;
+    }
+    .author{
+        background: gray;
+        color: white;
+    }
+    a{
+        text-decoration: none;
+    }
+
+    </style>
+</head>
+<body>
+
+<section>
+    <p class="text">Введіть кількість елементів</p>
+    <p><textarea rows="5" cols="5" id="numb"></textarea></p>
+    <p><input type="submit" value="Завдання 1" id="outputdfs" onclick="start()"></p>
+    <p><input type="submit" value="Завдання 2" id="" onclick="start2()"></p>
+    <p><input type="submit" value="чистити" id="o" onclick="clearFix()"></p>
+</section>
+<section>
+    <p class="text">Вивід масиву A</p>
+    <p><textarea rows="10" cols="45" id="arrA"></textarea></p>
+    <p class="text">Вивід масиву B</p>
+    <p><textarea rows="10" cols="45" id="arrB"></textarea></p>
+    
+</section>
+<section>
+<p class="text">Вивід чисел в несортованому масиві</p>
+    <p><textarea rows="10" cols="45" id="notSort"></textarea></p>
+    <p class="text">Вивід чисел в відсортованому масиві</p>
+    <p><textarea rows="10" cols="45" id="sort"></textarea></p>
+
+</section>
+<script type="text/javascript">
+
+	
+	
+	function searchNumb(arr,index){
+		var numbing=[];
+		var check=0
+		for(var number = 0,j=0;j<index;j++){
+			for(var i=0;i<arr.length;i++){
+				if(number==arr[i]){
+					check++
+				}
+				if(check==2){
+					numbing.push(arr[i])
+					break
+				}
+				
+			}
+			number++
+			check=0
+		}
+		return numbing
+	}
+	function selectionSort(arr){
+  		var minIdx, temp, 
+      	len = arr.length;
+  		for(var i = 0; i < len; i++){
+    		minIdx = i;
+    		for(var  j = i+1; j<len; j++){
+       			if(arr[j]<arr[minIdx]){
+          			minIdx = j;
+       			}
+    		}		
+    		temp = arr[i];
+    		arr[i] = arr[minIdx];
+    		arr[minIdx] = temp;
+  		}
+  		return arr;
+	}
+	function output(text,array){
+		for(var i = 0;i<array.length;i++){
+			text.value += array[i]+' '
+		}
+	}
+	function clearFix(){
+		var arrAoutput = document.getElementById('arrA')
+		var arrBoutput =document.getElementById('arrB')
+		var numbNotsort =document.getElementById('notSort')
+		var numbSort = document.getElementById('sort')
+		arrAoutput.value =''
+		arrBoutput.value =''
+		numbNotsort.value =''
+		numbSort.value =''
+	}
+	function start(){
+		var size = document.getElementById('numb').value;
+		var arrAoutput = document.getElementById('arrA')
+		var arrBoutput =document.getElementById('arrB')
+		var numbNotsort =document.getElementById('notSort')
+		var numbSort = document.getElementById('sort')
+		var index=100
+		var arrA = [size];
+		var arrB = [size];
+		for(var i =0;i<size;i++){
+			var numb = Math.floor(Math.random()*index);
+			arrA[i]=numb
+			numb = Math.floor(Math.random()*index);
+			arrB[i]=numb
+		};
+		output(arrAoutput,arrA);
+		output(arrBoutput,arrB);
+
+		console.time("first");
+
+		var first= searchNumb(arrA,index);
+		var second=searchNumb(arrB,index);
+		var zero = first.concat(second);
+		var setNotsort = new Set(zero)
+
+		console.timeEnd("first");
+
+		selectionSort(arrA)
+		selectionSort(arrB)
+
+		console.time("firstsort");
+
+		var firstSort=searchNumb(arrA,index);
+		var secondSort=searchNumb(arrB,index);
+		var zeroSort=firstSort.concat(secondSort);
+		var setSort = new Set(zeroSort)
+
+		console.timeEnd("firstsort")
+		output(numbNotsort,Array.from(setNotsort))
+		output(numbSort,Array.from(setSort))
+
+	}
+	function second(array1,array2,size){
+		var numbing=[];
+		var check=0
+		for(var number = 0,j=0;j<size;j++){
+			for(var i=0;i<array1.length;i++){
+				if(number==array1[i]){
+					check++
+				}
+			}
+			if(check == 1 && array2.includes(number)){
+				numbing.push(number)
+			}
+			number++
+			check=0
+		}
+		return numbing
+	}
+	function start2(){
+		var size = document.getElementById('numb').value;
+		var arrAoutput = document.getElementById('arrA')
+		var arrBoutput =document.getElementById('arrB')
+		var numbNotsort =document.getElementById('notSort')
+		var numbSort = document.getElementById('sort')
+		var index=100
+		var arrA = [size];
+		var arrB = [size];
+		for(var i =0;i<size;i++){
+			var numb = Math.floor(Math.random()*index);
+			arrA[i]=numb
+			numb = Math.floor(Math.random()*index);
+			arrB[i]=numb
+		};
+		output(arrAoutput,arrA);
+		output(arrBoutput,arrB);
+
+		console.time("second");
+
+		var twoNotsort = second(arrA,arrB,size)
+
+		console.timeEnd("second");
+
+		selectionSort(arrA)
+		selectionSort(arrB)
+
+		console.time("secondsort");
+
+		var twoSort=second(arrA,arrB,size)
+
+		console.timeEnd("secondsort")
+		output(numbNotsort,twoNotsort)
+		output(numbSort,twoSort)
+		
+	}
+
+
+</script>
+
+
+
+</body>
+</html>

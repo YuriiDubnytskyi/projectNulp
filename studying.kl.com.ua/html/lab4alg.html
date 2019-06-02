@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+
+        body{
+            background:#486596;
+            display: flex;
+        }
+        section{
+            margin: 20px;
+            padding: 20px;
+
+        }
+        .text{
+            color:white;
+        }
+        .author{
+            background: gray;
+            color: white;
+        }
+        a{
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<section>
+    <p class="text">Введіть кількість елементів</p>
+    <p><textarea rows="5" cols="5" id="numb"></textarea></p>
+    <p><input type="submit" value="Завдання 1" id="outputdfs" onclick="start()"></p>
+    <p><input type="submit" value="чистити" id="o" onclick="clearFix()"></p>
+</section>
+<section>
+    <p class="text">Вивід масиву A</p>
+    <p><textarea rows="10" cols="45" id="arrA"></textarea></p>
+
+</section>
+<section>
+    <p class="text">Вивід сортування включеням</p>
+    <p><textarea rows="10" cols="45" id="insertionSort"></textarea></p>
+    <p class="text">Вивід порозрядного сортування</p>
+    <p><textarea rows="10" cols="45" id="radixSort"></textarea></p>
+
+</section>
+<script type="text/javascript">
+    function clearFix(){
+        var arrAoutput = document.getElementById('arrA')
+        var insertionSortValue =document.getElementById('insertionSort')
+        var radixSortValue = document.getElementById('radixSort')
+        arrAoutput.value =''
+        insertionSortValue.value =''
+        radixSortValue.value =''
+    }
+    function output(text,array){
+        for(var i = 0;i<array.length;i++){
+            text.value += array[i]+' '
+        }
+    }
+    var counter = [[]];
+    function radixSorting(array, maxDigitSymbols) {
+        var mod = 10;
+        var dev = 1;
+        for (var i = 0; i < maxDigitSymbols; i++, dev *= 10, mod *= 10) {
+            for (var j = 0; j < array.length; j++) {
+                var bucket = parseInt((array[j] % mod) / dev);
+                if (counter[bucket] == null ) {
+                    counter[bucket] = [];
+                }
+                counter[bucket].push(array[j]);
+            }
+            var pos = 0;
+            for (var j = 0; j < counter.length; j++) {
+                var value = null ;
+                if (counter[j] != null ) {
+                    while ((value = counter[j].shift()) != null ) {
+                        array[pos++] = value;
+                    }
+                }
+            }
+        }
+        return array;
+    }
+    function start() {
+        var size = document.getElementById('numb').value;
+        var arrAoutput = document.getElementById('arrA')
+        var insertionSortValue =document.getElementById('insertionSort')
+        var radixSortValue = document.getElementById('radixSort')
+        var arrA = [size];
+        var arrB = [size];
+        for(var i =0;i<size;i++){
+            var rand = 100 + Math.random() * (999 - 100)
+            arrA[i]= Math.round(rand);
+            arrB[i]= Math.round(rand);
+        };
+        output(arrAoutput,arrA)
+        console.time('insertionSort')
+        insertionSort(arrA)
+        console.timeEnd('insertionSort')
+        output(insertionSortValue,arrA)
+        console.time('radixSort')
+        radixSorting(arrB,3)
+        console.timeEnd('radixSort')
+        output(radixSortValue,arrB)
+    }
+    const insertionSort = arr => {
+        for (let i = 1, l = arr.length; i < l; i++) {
+            const current = arr[i];
+            let j = i;
+            while (j > 0 && arr[j - 1] > current) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = current;
+        }
+        return arr;
+    };
+
+</script>
+
+
+
+</body>
+</html>

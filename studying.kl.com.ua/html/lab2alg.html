@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+	
+	var text = prompt("Text input --")
+	var date = text.split("");
+	var TRUE = true;
+	var dictionaryDecode ={	}
+	var dictionary = {}
+	const set1 = new Set(date);
+	var newarray = Array.from(set1);
+	for(var i = 0 ;i<set1.size;i++){
+		dictionary[newarray[i]]=i+1
+		dictionaryDecode[newarray[i]]=i+1
+	}
+
+	while(TRUE){
+		var coding;
+		var variable = +prompt("1--coding;2--decoding;3--again")
+		if(variable == 1){
+			coding = coder(date,dictionary)
+			console.log(coding)
+		}else if(variable == 2){
+			var cad = prompt('Цифрова послідовність')
+			var decod = decoder(cad,dictionaryDecode)
+			console.log(decod)
+		}
+		var again = +prompt("3--again")
+		if(again != 3){
+			TRUE = false
+		}
+	}
+	
+	function coder(date,dictionary){
+		var index = 5;
+		var exit= [];
+		for(var i =0;i<date.length;i++){
+			
+			
+			var rad = date[i]
+		 	var charing = date[i+1]
+	 		var includ = rad+charing
+			if(!dictionary[includ]){
+				dictionary[includ] = index;
+				exit.push(dictionary[rad])
+				index++	
+			}else if(!dictionary[includ+date[i+2]]){
+				dictionary[includ+date[i+2]] = index;
+				exit.push(dictionary[includ])
+				index++
+				i++
+			}
+		}
+		
+		return exit
+	}
+
+	function decoder(exit,dictionaryDecode){
+		var index = 5;
+		var exitde= [];
+		for(var i =0;i<exit.length;i++){
+			var numb = exit[i]
+			var char
+			for(var key in dictionaryDecode) {
+				if(dictionaryDecode[key]==numb){
+					 exitde.push(key)
+					 char = key[0]
+				}
+				
+			}
+			if(i > 0){
+				dictionaryDecode[exitde[i-1]+char]=index
+				index++
+			}
+		}
+		return exitde
+	}
+	console.log(dictionaryDecode)
+
+
+</script>
+
+
+
+</body>
+</html>

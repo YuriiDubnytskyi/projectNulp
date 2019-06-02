@@ -1,0 +1,18 @@
+body{
+    background:#486596;
+    display: flex;
+}
+section{
+    margin: 20px;
+    padding: 20px;
+}
+.text{
+    color:white;
+}
+.author{
+    background: gray;
+    color: white;
+}
+a{
+    text-decoration: none;
+}

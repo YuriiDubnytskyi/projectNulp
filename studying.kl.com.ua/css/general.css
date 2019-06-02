@@ -1,0 +1,91 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans';
+}
+body{
+    width: 100%;
+    background: slategray;
+}
+.subject{
+
+    padding: 30px;
+    margin: 30px;
+    background: slateblue;
+    text-align: center;
+}
+.box{
+    display: flex;
+}
+
+.box_info{
+    display: flex;
+
+}
+.box_lab{
+    display: flex;
+
+}
+.box_materials{
+    display: flex;
+
+}
+.link{
+    text-decoration: none;
+    color: lightskyblue;
+}
+.subject_info{
+    padding: 10px 30px;
+    margin: 10px;
+    background: gray;
+}
+.subject_info p {
+    margin: 10px 0;
+    background: slateblue;
+    text-align: center;
+}
+.subject_lab{
+    padding: 10px 30px;
+    margin: 10px;
+    background: gray;
+}
+.subject_materials{
+    padding: 10px 30px;
+    margin: 10px;
+
+}
+li{
+    margin: 10px 0;
+    background: slateblue;
+    text-align: center;
+    color:lightskyblue;
+    border: 10px solid grey;
+
+}
+ul{
+    list-style: none;
+}
+ul li a{
+    text-decoration: none;
+    color:lightskyblue;
+    list-style-type: none;
+}
+.maths_lab{
+    margin: 10px 0;
+    background: slateblue;
+    text-align: center;
+
+}
+.maths_lab a{
+    text-decoration: none;
+    color:lightskyblue;
+}
+
+
+
+
+
+
+
+
+

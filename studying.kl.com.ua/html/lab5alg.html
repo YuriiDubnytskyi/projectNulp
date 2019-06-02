@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab 5</title>
+    <style type="text/css">
+
+        body{
+            background:#486596;
+            display: flex;
+        }
+        section{
+            margin: 20px;
+            padding: 20px;
+
+        }
+        .text{
+            color:white;
+        }
+        .author{
+            background: gray;
+            color: white;
+        }
+        a{
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<section>
+    <p class="text">Введіть довжину стін</p>
+    <p><textarea rows="2" cols="15" id="numb"></textarea></p>
+
+    <p class="text">Введіть пройдений шлях до східної стіни A</p>
+    <p><textarea rows="2" cols="15" id="numbA"></textarea></p>
+
+    <p class="text">Введіть пройдений шлях до південної стіни B</p>
+    <p><textarea rows="2" cols="15" id="numbB"></textarea></p>
+
+    <p class="text">Введіть пройдений шлях до західної стіни C</p>
+    <p><textarea rows="2" cols="15" id="numbC"></textarea></p>
+
+    <p class="text">Введіть пройдений шлях до південної стіни D</p>
+    <p><textarea rows="2" cols="15" id="numbD"></textarea></p>
+
+    <p><input type="submit" value="Завдання 2" id="extwo" onclick="exTwo()"></p>
+    <p><input type="submit" value="чистити" id="o" onclick="clearFix()"></p>
+</section>
+<section>
+    <p class="text">Вивід що бачить людина</p>
+    <p><textarea rows="10" cols="45" id="exersise2"></textarea></p>
+</section>
+<section>
+
+    <p class="text">Вершина A</p>
+    <p><textarea rows="2" cols="2" id="verAx"></textarea></p>
+    <p><textarea rows="2" cols="2" id="verAy"></textarea></p>
+    <p class="text">Вершина B</p>
+    <p><textarea rows="2" cols="2" id="verBx"></textarea></p>
+    <p><textarea rows="2" cols="2" id="verBy"></textarea></p>
+    <p class="text">Вершина C</p>
+    <p><textarea rows="2" cols="2" id="verCx"></textarea></p>
+    <p><textarea rows="2" cols="2" id="verCy"></textarea></p>
+    <p class="text">Вершина D</p>
+    <p><textarea rows="2" cols="2" id="verDx"></textarea></p>
+    <p><textarea rows="2" cols="2" id="verDy"></textarea></p>
+
+    <p><input type="submit" value="Завдання 2" id="exone" onclick="exOne()"></p>
+</section>
+<section>
+    <canvas id="myCanvas" width="300" height="300" style="background: white;border: 1px solid black"></canvas>
+</section>
+
+
+<script>
+    function exTwo() {
+        var man={'see':'зелений'};
+        var numbL = document.getElementById('numb').value;
+        var numbA = document.getElementById('numbA').value;
+        var numbB = document.getElementById('numbB').value;
+        var numbC = document.getElementById('numbC').value;
+        var numbD = document.getElementById('numbD').value;
+        var text = document.getElementById('exersise2');
+        var ob1=0;
+        var ob2=0;
+        if(numbA != 0 && numbA <= numbL){
+            man.see='зелений'
+            ob1=numbL-(numbL-numbA)
+        }
+        if(numbB != 0 && numbB <= numbL){
+            man.see ='рожевий'
+            ob2=numbL-(numbL-numbB)
+        }
+        if(numbC != 0 && numbC <= ob1 && numbC <= numbL){
+            man.see ='синій'
+        }else if(numbC == 0){}else if(numbC > ob1){
+            text.value +=('error');
+            return
+        }
+        if(numbD != 0 && numbD <= ob2 && numbD <= numbL){
+            man.see ='білий'
+        }else if(numbD == 0){}else if(numbC > ob2){
+            text.value +=('error');
+            return
+        }
+
+        text.value +=(man.see)
+    }
+    function exOne() {
+        var x1 = document.getElementById('verAx').value;
+        var y1 = document.getElementById('verAy').value;
+        var x2 = document.getElementById('verBx').value;
+        var y2 = document.getElementById('verBy').value;
+        var x3 = document.getElementById('verCx').value;
+        var y3 = document.getElementById('verCy').value;
+        var x4 = document.getElementById('verDx').value;
+        var y4 = document.getElementById('verDy').value;
+        var canvas = document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
+        context.beginPath();
+        context.moveTo(x1*30,y1*30);
+        context.lineTo(x2*30,y2*30);
+        context.lineTo(x3*30,y3*30);
+        context.closePath();
+        context.strokeStyle='red';
+        context.stroke();
+        var contextPoint = canvas.getContext('2d');
+        contextPoint.beginPath();
+        contextPoint.fillRect(x4*30,y4*30,5,5);
+        contextPoint.closePath();
+        contextPoint.strokeStyle='black';
+        contextPoint.stroke();
+    }
+
+
+
+</script>
+
+
+</body>
+</html>
